@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合作商户</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/product.css">
+</head>
+<body>
+    <div id="header"></div>
+    <!--主题-->
+    <div class="content clearfix">
+        <!--互汇通可换卡商户-->
+        <div class="new_shop clearfix">
+            <h3 class="shop_tit">互汇通可换卡商户</h3>
+            <ul>
+                <li>
+                    <div class="shop_img"><img src="../img/Recommend7.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：沃尔玛</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：商超百货</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/huarun.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：华润万家</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：商超百货</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/tianhong.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：天虹商城</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：商超百货</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/maoye.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：茂业百货</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：商超百货</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/jialefu.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：家乐福</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：商超百货</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/shiyou.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：中国石油</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：汽车服务</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/shihua.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：中国石化</p>
+                       <p>签约分店：深圳通用</p>
+                       <p>主营业务：汽车服务</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/suning.png" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：苏宁易购</p>
+                       <p>签约分店：全国通用</p>
+                       <p>主营业务：网上购物</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/jd.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：京东商城</p>
+                       <p>签约分店：全国通用</p>
+                       <p>主营业务：网上购物</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_img"><img src="../img/tianmao.jpg" alt=""></div>
+                    <div class="shop_info">
+                       <p>商户名称：天猫商城</p>
+                       <p>签约分店：全国通用</p>
+                       <p>主营业务：网上购物</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--/互汇通可换卡商户-->
+        <!--奥斯卡直刷商户-->
+        <div class="Recommended_merchant">
+           		<div class="Recommended_tit">
+                <span>奥斯卡直刷商户</span>
+                <nav class="tab2">
+                	<li class="current">全部商户</li>
+                	<li class="first">商超百货</li>
+                	<li class="second">餐饮美食</li>
+                	<li class="third">生活服务</li>
+                	<li class="fourth">汽车服务</li>
+                  
+                </nav>
+                </div>
+
+            <ul class="Recommended_Merchant">
+            </ul>
+        </div>
+        <!--/奥斯卡直刷商户-->
+    </div>
+    <!--/主体-->
+    <div id="footer"></div>
+</body>
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/public.js"></script>
+<script>
+    $(function () {
+        $('#nav li').eq(0).removeClass('select');
+        $('#nav li').eq(2).addClass('select');
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+        			var html='';
+                for(var i=0;i<data.length;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+		$(".tab2 li").click(function(e) {
+            $(this).addClass('current').siblings().removeClass('current')
+        });
+		$(".tab2 .second").click(function(e) {
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+       				 var html='';
+                for(var i=26;i<42;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+        });
+		$(".tab2 .third").click(function(e) {
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+               var html='';
+                for(var i=42;i<65;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+        });
+		$(".tab2 .fourth").click(function(e) {
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+               var html='';
+                for(var i=65;i<74;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+        });
+		$(".tab2 .current").click(function(e) {
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+               var html='';
+                for(var i=0;i<74;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+        });
+		$(".tab2 .first").click(function(e) {
+        $.ajax({
+            url:"../mock/Merchant.json",
+            dataType:"json",
+            success:function(data){
+               var html='';
+                for(var i=0;i<26;i++){
+                    html+='<li><div class="shop_img"><a href="../html/Merchant_detailed.html"><img src='+data[i].shoplogo+' alt=""></a></div><div class="shop_info"><p>商户名称：<a href="../html/Merchant_detailed.html">'+data[i].shop_names+'</a></p><p>签约分店：'+data[i].branch_office+'</p><p>主营业务：'+data[i].business+'</p></div></li>'
+                }
+                $('.Recommended_Merchant').html(html);
+                
+                $('.Recommended_Merchant li').find('a').click(function(){
+                    var value=$(this).parents('li').index();
+                    sessionStorage.setItem('key',value);
+                })
+            }
+        })
+        });
+		
+		
+		
+    });
+</script>
+</html>
+
+
+
+
+
+

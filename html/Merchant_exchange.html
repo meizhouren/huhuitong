@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>互汇通购物卡官网-消费购物卡专家 礼品卡 福利卡的最佳首选</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/product.css">
+</head>
+<body>
+    <div id="header"></div>
+    <div class="detailed clearfix">
+        <div class="detailed_left">
+            <div class="detailed_info">
+
+            </div>
+            
+            <div class="shop_info clearfix">
+                <h2>换卡地址</h2>
+                <em></em>
+                <div class="branch_office_list clearfix">
+
+                </div>
+            </div>
+        </div>
+        <div class="detailed_right">
+            <h3>---互汇通换卡简介---</h3>
+            <p>
+                深圳复合门户网络科技有限公司支持预付卡、单消费卡购买和互换（可扫描公众号下单兑换），奥斯卡可充值深圳通、单消费卡、加油卡、电商卡等，需要加收5%手续费，100元起换，预付卡、单消费卡回收9折；兑换卡后，不接受退换处理，可回收。平台还支持现金、转账、支票、信用卡刷卡、等多支付渠道购买奥斯卡预付卡、商场单消费卡。 
+            </p>
+        </div>
+    </div>
+    <div id="footer"></div>
+</body>
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/public.js"></script>
+<script>
+    $(function () {
+        $('#nav li').eq(0).removeClass('select');
+        $('#nav li').eq(2).addClass('select');
+        $.ajax({
+            url:"../mock/exchange.json",
+            dataType:"json",
+            success:function(data){
+               var key=sessionStorage.getItem('key');
+               var html='';
+               var  htmls='';
+                html+='<dl><dt><img src='+data[key].shoplogo+' alt=""></dt><dd><ul><li>店铺名称：'+data[key].shop_names+'</li><li>签约分店：'+data[key].branch_office+'</li><li>主营业务：'+data[key].business+'</li><li>公司网址：'+data[key].url+'</li><li>会员折扣：'+data[key].discount+'</li></ul></dd></dl>'
+                for(var j=0;j<data[key].branch_office_info.length;j++){
+                    var branch_office_address=data[key].branch_office_info[j].branch_office_address;
+                    var branch_office_tel=data[key].branch_office_info[j].branch_office_tel;
+                    var branch_office_email=data[key].branch_office_info[j].branch_office_email;
+                    var branch_office_state=data[key].branch_office_info[j].branch_office_state;
+                    htmls+='<ul><li>换卡地址：'+branch_office_address+'</li><li>联系电话：'+branch_office_tel+'</li><li>公司邮箱：'+branch_office_email+'</li><li>换卡说明：'+branch_office_state+'</li></ul>'
+                    $('.branch_office_list').html(htmls);
+                }
+                $('.detailed_info').html(html);          
+            }
+        })
+    });
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
